@@ -14,19 +14,24 @@ class MyGarden extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <>
-        <Header />
-        <View>
-          <View style={styles.container}>
-            <ImageBackground
-              style={styles.image}
-              source={require("../assets/greenhouse.jpg")}
-            >
-              <Text style={styles.text} onPress={() => navigate("MyPlants")}>
-                My Garden
-              </Text>
-            </ImageBackground>
+        <ImageBackground
+          source={require("../images/background.jpg")}
+          style={((width = "100%"), (height = "100%"))}
+        >
+          <Header />
+          <View>
+            <View style={styles.container}>
+              <ImageBackground
+                style={styles.image}
+                source={require("../assets/greenhouse.jpg")}
+              >
+                <Text style={styles.text} onPress={() => navigate("MyPlants")}>
+                  My Garden
+                </Text>
+              </ImageBackground>
+            </View>
           </View>
-        </View>
+        </ImageBackground>
       </>
     );
   }

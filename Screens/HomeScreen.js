@@ -1,35 +1,46 @@
 import React from "react";
-import { StyleSheet, View, Text, Button, TextInput } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  TextInput,
+  ImageBackground
+} from "react-native";
 import Header from "../Components/Header";
-// import App from "../App";
 
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: "Header"
-  };
+  // static navigationOptions = {
+  //   header: null
+  // };
   render() {
     const { navigate } = this.props.navigation;
     return (
       <>
-        <View>
-          {/* <App /> */}
-          <Header />
-        </View>
-        <View style={{ padding: 100, alignItems: "center" }}>
-          <View
-            style={{
-              flexDirection: "column",
-              justifyContent: "center"
-            }}
-          >
-            <Text style={styles.text}>Welcome to your garden!</Text>
-            <TextInput placeholder="email" style={styles.input}></TextInput>
-            <TextInput placeholder="password" style={styles.input} />
-            <View>
-              <Button title="Log In" onPress={() => navigate("MyGarden")} />
+        <ImageBackground
+          source={require("../images/background.jpg")}
+          style={((width = "100%"), (height = "100%"))}
+        >
+          <View>
+            {/* <App /> */}
+            <Header />
+          </View>
+          <View style={{ padding: 100, alignItems: "center" }}>
+            <View
+              style={{
+                flexDirection: "column",
+                justifyContent: "center"
+              }}
+            >
+              <Text style={styles.text}>Welcome to your garden!</Text>
+              <TextInput placeholder="email" style={styles.input}></TextInput>
+              <TextInput placeholder="password" style={styles.input} />
+              <View>
+                <Button title="Log In" onPress={() => navigate("MyGarden")} />
+              </View>
             </View>
           </View>
-        </View>
+        </ImageBackground>
       </>
     );
   }
@@ -44,10 +55,11 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 300,
-    borderColor: "black",
+    borderBottomColor: "black",
     borderWidth: 1,
     padding: 10,
-    marginBottom: 20
+    marginBottom: 20,
+    backgroundColor: "white"
   },
   text: {
     alignContent: "center",

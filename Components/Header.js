@@ -6,7 +6,6 @@ const Header = () => {
     <View style={styles.header}>
       <Text style={styles.text}>Menu</Text>
       <Text style={styles.text}>Header</Text>
-      <Button title="back"></Button>
     </View>
   );
 };

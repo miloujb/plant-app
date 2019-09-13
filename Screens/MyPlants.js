@@ -1,37 +1,20 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  ListView,
-  FlatList,
-  Image
-} from "react-native";
-import { ListItem } from "react-native-elements";
+import { StyleSheet, View, Text, FlatList, Image } from "react-native";
 
-const plants = [
-  { name: "tomato", image: "../assets/splash.png" },
-  { name: "snapdragon", image: "../assets/splash.png" },
-  { name: "beans", image: "../assets/splash.png" }
-];
+const plants = [{ name: "tomato" }, { name: "snapdragon" }, { name: "beans" }];
 class MyPlants extends Component {
   render() {
     return (
-      <>
-        <View style={styles.container}>
-          <FlatList
-            data={plants}
-            renderItem={({ item }) => (
-              <Text style={styles.text}>{item.name}</Text>,
-              (
-                <Image source={require("../assets/splash.png")}>
-                  {item.image}
-                </Image>
-              )
-            )}
-          />
-        </View>
-      </>
+      <View style={styles.container}>
+        <FlatList
+          data={plants}
+          renderItem={({ item }) => (
+            <View>
+              <Text style={styles.text}>{item.name}</Text>
+            </View>
+          )}
+        />
+      </View>
     );
   }
 }
@@ -41,6 +24,7 @@ const styles = StyleSheet.create({
     width: 275,
     height: 275,
     flexGrow: 1,
+    
     justifyContent: "center",
     alignItems: "center"
   },
