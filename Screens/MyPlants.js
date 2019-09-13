@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, FlatList, Image } from "react-native";
+import { getAllData } from "../api";
 
 const plants = [{ name: "tomato" }, { name: "snapdragon" }, { name: "beans" }];
 class MyPlants extends Component {
+  state = {
+    data: []
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -17,6 +21,20 @@ class MyPlants extends Component {
       </View>
     );
   }
+
+  componentDidMount = () => {
+    this.fetchAllData();
+  };
+
+  fetchAllData = () => {
+    getAllData()
+      .then(data => {
+        this.setState({ data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 }
 
 const styles = StyleSheet.create({
@@ -24,7 +42,7 @@ const styles = StyleSheet.create({
     width: 275,
     height: 275,
     flexGrow: 1,
-    
+
     justifyContent: "center",
     alignItems: "center"
   },
