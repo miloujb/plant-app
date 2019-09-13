@@ -1,31 +1,35 @@
-import React from "react";
+import React, { Component } from "react";
 import {
+  StyleSheet,
   View,
   Text,
-  StyleSheet,
-  Button,
-  Image,
-  ImageBackground
+  ListView,
+  FlatList,
+  Image
 } from "react-native";
-import Header from "../Components/Header";
+import { ListItem } from "react-native-elements";
 
-class MyGarden extends React.Component {
+const plants = [
+  { name: "tomato", image: "../assets/splash.png" },
+  { name: "snapdragon", image: "../assets/splash.png" },
+  { name: "beans", image: "../assets/splash.png" }
+];
+class MyPlants extends Component {
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <>
-        <Header />
-        <View>
-          <View style={styles.container}>
-            <ImageBackground
-              style={styles.image}
-              source={require("../assets/greenhouse.jpg")}
-            >
-              <Text style={styles.text} onPress={() => navigate("MyPlants")}>
-                My Garden
-              </Text>
-            </ImageBackground>
-          </View>
+        <View style={styles.container}>
+          <FlatList
+            data={plants}
+            renderItem={({ item }) => (
+              <Text style={styles.text}>{item.name}</Text>,
+              (
+                <Image source={require("../assets/splash.png")}>
+                  {item.image}
+                </Image>
+              )
+            )}
+          />
         </View>
       </>
     );
@@ -59,7 +63,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "white",
+    color: "black",
     textAlign: "center"
     // position: "absolute",
     // bottom: 0
@@ -72,4 +76,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MyGarden;
+export default MyPlants;
