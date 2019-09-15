@@ -1,14 +1,17 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import Menu from "../Components/Menu";
 import { MenuButton } from "./MenuButton";
+import { DrawerNavigator } from "../App";
+import { withNavigation } from "react-navigation";
 
 export default class Header extends Component {
   render() {
     return (
-      <View style={styles.header}>
-        <Text style={styles.text}>Menu</Text>
-        <Text style={styles.text}>Header</Text>
+      <View style={styles.container}>
+        {/* <TouchableOpacity onPress={this.props.navigation.openDrawer()}>
+          <Text>Open Drawer</Text>
+        </TouchableOpacity> */}
       </View>
     );
   }
