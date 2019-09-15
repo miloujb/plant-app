@@ -1,14 +1,18 @@
-import React from "react";
+import React, { Component } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
+import Menu from "../Components/Menu";
+import { MenuButton } from "./MenuButton";
 
-const Header = () => {
-  return (
-    <View style={styles.header}>
-      <Text style={styles.text}>Menu</Text>
-      <Text style={styles.text}>Header</Text>
-    </View>
-  );
-};
+export default class Header extends Component {
+  render() {
+    return (
+      <View style={styles.header}>
+        <Text style={styles.text}>Menu</Text>
+        <Text style={styles.text}>Header</Text>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   header: {
@@ -25,5 +29,3 @@ const styles = StyleSheet.create({
     color: "white"
   }
 });
-
-export default Header;

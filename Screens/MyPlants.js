@@ -2,19 +2,20 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, FlatList, Image } from "react-native";
 import { getAllData } from "../api";
 
-const plants = [{ name: "tomato" }, { name: "snapdragon" }, { name: "beans" }];
 class MyPlants extends Component {
   state = {
+    isLoading: true,
     data: []
   };
   render() {
+    const { data, isLoading } = this.state;
     return (
       <View style={styles.container}>
         <FlatList
-          data={plants}
+          data={data}
           renderItem={({ item }) => (
             <View>
-              <Text style={styles.text}>{item.name}</Text>
+              <Text style={styles.text}>Id: {item.id} Humidity: {item.humidity}</Text>
             </View>
           )}
         />
@@ -29,7 +30,8 @@ class MyPlants extends Component {
   fetchAllData = () => {
     getAllData()
       .then(data => {
-        this.setState({ data });
+        console.log(data, 'plant');
+        this.setState({ data, isLoading: false });
       })
       .catch(error => {
         console.log(error);

@@ -9,7 +9,9 @@ const api = new Frisbee({
 });
 
 export const getAllData = () => {
-  return api.get('https://nc-greenhouse-project.herokuapp.com/greenhouse').then(({ body }) => {
-    console.log(body);
-  });
+  return api
+    .get("https://nc-greenhouse-project.herokuapp.com/greenhouse")
+    .then(({ body: { readings } }) => {
+      return readings;
+    });
 };

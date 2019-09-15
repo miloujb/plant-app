@@ -5,14 +5,34 @@ import {
   Text,
   Button,
   TextInput,
-  ImageBackground
+  ImageBackground,
+  Alert
 } from "react-native";
 import Header from "../Components/Header";
+import { withTheme } from "react-native-elements";
 
 export default class HomeScreen extends React.Component {
   // static navigationOptions = {
   //   header: null
   // };
+  state = {
+    username: "",
+    password: ""
+  };
+
+  static navigationOptions = {
+    header: null
+  };
+  checkLogin() {
+    const { username, password } = this.state;
+    if (username == "admin" && password == "admin") {
+      this.props.navigation.navigate("MyGarden");
+    } else {
+      Alert.alert("Error", "Username or Password is not correct", [
+        { text: "Okay" }
+      ]);
+    }
+  }
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -33,10 +53,22 @@ export default class HomeScreen extends React.Component {
               }}
             >
               <Text style={styles.text}>Welcome to your garden!</Text>
-              <TextInput placeholder="email" style={styles.input}></TextInput>
-              <TextInput placeholder="password" style={styles.input} />
+              <Text style={styles.text}>Login into your account</Text>
+              <TextInput
+                placeholder="email"
+                style={styles.input}
+                onChangeText={text => this.setState({ username: text })}
+              ></TextInput>
+              <TextInput
+                placeholder="password"
+                style={styles.input}
+                secureTextEntry={true}
+                onChangeText={text => this.setState({ password: text })}
+              />
               <View>
-                <Button title="Log In" onPress={() => navigate("MyGarden")} />
+                <Button title="LogIn" onPress={() => this.checkLogin()} />
+
+                {/* <Button title="LogIn" onPress={() => navigate("MyGarden")} /> */}
               </View>
             </View>
           </View>
@@ -62,7 +94,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white"
   },
   text: {
-    alignContent: "center",
+    textAlign: "center",
+    color: "white",
     fontSize: 24,
     fontWeight: "bold"
   },
