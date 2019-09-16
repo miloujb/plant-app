@@ -173,7 +173,7 @@ const StackNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     Garden: MyGarden,
-    // Plants: MyPlants,
+    Plants: MyPlants,
     Logout: LogOut
   },
   {
@@ -219,7 +219,7 @@ const StackNavigator = createStackNavigator(
 const AppDrawerNavigator = createDrawerNavigator({
   Home: { screen: StackNavigator },
   Garden: { screen: StackNavigator },
-  // Plants: { screen: StackNavigator },
+  Plants: { screen: StackNavigator },
   Logout: { screen: StackNavigator }
 });
 

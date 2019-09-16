@@ -10,6 +10,7 @@ import {
 // import Header from "../Components/Header";
 import { Header, Left, Right, Icon } from "native-base";
 import { getAllData } from "../api";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class MyGarden extends React.Component {
   state = {
@@ -19,7 +20,6 @@ class MyGarden extends React.Component {
   render() {
     const { data, isLoading } = this.state;
     const { navigate, openDrawer } = this.props.navigation;
-    console.log(data);
     if (data !== undefined && isLoading === false) {
       return (
         <>
@@ -56,10 +56,42 @@ class MyGarden extends React.Component {
               Hum: {data[0].humidity}
             </Text>
           </View>
-          <View>
+          <View style={styles.touchable}>
+            <TouchableOpacity style={styles.button1}>
+              <Text style={styles.text}>Open Window</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.text}>Water Plant</Text>
+            </TouchableOpacity>
             <Button title="To my plants"></Button>
             {/* <View style={styles.container}>
             <ImageBackground
+    width: "75%"
+  },
+  button1: {
+    padding: 50,
+    borderRadius: 50,
+    backgroundColor: "#d4fc79",
+    margin: 0,
+    width: "75%"
+  },
+  topHalf: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  touchable: {
+    color: "black",
+    flex: 1,
+    borderRadius: 30,
+    paddingBottom: 150,
+    justifyContent: "space-between",
+    flexDirection: "row"
+  }
+});
+
+export default MyGarden;
+
               style={styles.image}
               source={require("../assets/greenhouse.jpg")}
             >
@@ -102,16 +134,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    flexDirection: "row",
+    flexWrap: "wrap"
     // left: 0,
     // top: 0
   },
   text: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "white",
-    textAlign: "center"
+    color: "black",
+    textAlign: "center",
+    justifyContent: "center"
     // position: "absolute",
     // bottom: 0
     // right: 0
@@ -119,12 +152,29 @@ const styles = StyleSheet.create({
   button: {
     padding: 50,
     borderRadius: 50,
-    backgroundColor: "#23b11b"
+    backgroundColor: "#d4fc79",
+    margin: 0,
+    width: "100%"
+  },
+  button1: {
+    padding: 50,
+    borderRadius: 50,
+    backgroundColor: "#d4fc79",
+    marginRight: 20,
+    width: "100%"
   },
   topHalf: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between"
+  },
+  touchable: {
+    color: "black",
+    flex: 1,
+    borderRadius: 30,
+    paddingBottom: 150,
+    justifyContent: "space-between",
+    flexDirection: "row"
   }
 });
 
