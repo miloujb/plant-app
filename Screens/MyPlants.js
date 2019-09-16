@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { getAllData } from "../api";
 import { Header, Left, Right, Icon } from "native-base";
+import hamster from "../images/hamster.gif";
 
 class MyPlants extends Component {
   state = {
@@ -18,7 +19,7 @@ class MyPlants extends Component {
   render() {
     const { data, isLoading } = this.state;
     const { navigate, openDrawer } = this.props.navigation;
-    if (isLoading) return <Text>Loading...</Text>;
+    if (isLoading) return <Image source={require('../images/hamster.gif')} styles={styles.image} />;
     return (
       <>
         <Header
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
     width: 275,
     height: 275,
     flexGrow: 1,
-
     justifyContent: "center",
     alignItems: "center"
   },

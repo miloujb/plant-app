@@ -12,8 +12,7 @@ import {
 } from "react-native";
 // import Header from "../Components/Header";
 import ReactorGrowFinal2 from "../assets/ReactorGrowFinal2.png";
-import { Header, Left, Right, Icon, ActionSheet } from "native-base";
-import { withTheme } from "react-native-elements";
+import { Header, Left, Right, Icon } from "native-base";
 
 export default class HomeScreen extends React.Component {
   state = {
@@ -31,6 +30,7 @@ export default class HomeScreen extends React.Component {
     if (username == "a" && password == "a") {
       console.log(this.props.navigation, "<<<<<");
       this.props.navigation.navigate("Garden");
+      this.setState({ password: "", username: "" });
     } else {
       Alert.alert("Error", "Username or Password is not correct", [
         { text: "Okay" }
@@ -39,6 +39,7 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
+    const { password, username } = this.state;
     const { navigate, openDrawer } = this.props.navigation;
     return (
       <>
@@ -63,9 +64,6 @@ export default class HomeScreen extends React.Component {
               Reactor Grow
             </Text>
           </View>
-          <Right>
-            <Icon name="menu" onPress={() => openDrawer()} />
-          </Right>
         </Header>
         {/* <ImageBackground source={require(bg.jpg)}> */}
         <View style={styles.container}>
@@ -83,14 +81,16 @@ export default class HomeScreen extends React.Component {
             {/* <Text style={styles.text}>Welcome to your garden!</Text> */}
             <Text style={styles.text}>Login into your account</Text>
             <TextInput
-              placeholder="email"
+              placeholder="John Doe"
               style={styles.input}
+              value={username}
               onChangeText={text => this.setState({ username: text })}
             ></TextInput>
             <TextInput
-              placeholder="password"
+              placeholder="your password"
               style={styles.input}
               secureTextEntry={true}
+              value={password}
               onChangeText={text => this.setState({ password: text })}
             />
             <View>

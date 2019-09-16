@@ -5,6 +5,7 @@ import { createAppContainer } from "react-navigation";
 import HomeScreen from "./Screens/HomeScreen";
 import MyGarden from "./Screens/MyGarden";
 import MyPlants from "./Screens/MyPlants";
+import LogOut from "./Screens/LogOut";
 import LogIn from "./Components/LogIn";
 import { View } from "native-base";
 import { createDrawerNavigator } from "react-navigation-drawer";
@@ -172,7 +173,8 @@ const StackNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     Garden: MyGarden,
-    Plants: MyPlants
+    Plants: MyPlants,
+    Logout: LogOut
   },
   {
     hideStatusBar: true,
@@ -217,7 +219,8 @@ const StackNavigator = createStackNavigator(
 const AppDrawerNavigator = createDrawerNavigator({
   Home: { screen: StackNavigator },
   Garden: { screen: StackNavigator },
-  Plants: { screen: StackNavigator }
+  Plants: { screen: StackNavigator },
+  Logout: { screen: StackNavigator }
 });
 
 const App = createAppContainer(AppDrawerNavigator);
