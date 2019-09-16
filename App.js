@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, Dimensions } from "react-native";
-import { createStackNavigator, StackNavigator } from "react-navigation-stack";
+import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import HomeScreen from "./Screens/HomeScreen";
 import MyGarden from "./Screens/MyGarden";
@@ -11,9 +11,9 @@ import { createDrawerNavigator } from "react-navigation-drawer";
 
 const { width } = Dimensions.get("window");
 
-//Main screens for drawer navigator
+// Main screens for drawer navigator
 
-// export const MainStack = createStackNavigator(
+// export const HomeScreen = createStackNavigator(
 //   {
 //     Garden: {
 //       screen: MyGarden,
@@ -34,11 +34,17 @@ const { width } = Dimensions.get("window");
 //   { headerMode: "screen" }
 // );
 
-// //Drawer Navigator
+// Drawer Navigator
 
 // export const Drawer = createDrawerNavigator({
-//   MainStack: {
-//     screen: MainStack
+//   Home: {
+//     screen: HomeScreen
+//   },
+//   Garden: {
+//     screen: MyGarden
+//   },
+//   Plants: {
+//     screen: MyPlants
 //   }
 // });
 
@@ -162,7 +168,7 @@ const { width } = Dimensions.get("window");
 //   }
 // );
 
-const DrawerNavigator = createDrawerNavigator(
+const StackNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     Garden: MyGarden,
@@ -208,12 +214,11 @@ const DrawerNavigator = createDrawerNavigator(
 //   }
 // );
 
-const AppStackNavigator = createStackNavigator({
-  Home: { screen: DrawerNavigator },
-  Garden: { screen: DrawerNavigator },
-  Plants: { screen: DrawerNavigator }
-  // Login: { screen: LogIn }
+const AppDrawerNavigator = createDrawerNavigator({
+  Home: { screen: StackNavigator },
+  Garden: { screen: StackNavigator },
+  Plants: { screen: StackNavigator }
 });
 
-const App = createAppContainer(AppStackNavigator);
+const App = createAppContainer(AppDrawerNavigator);
 export default App;

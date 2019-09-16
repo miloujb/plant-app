@@ -7,16 +7,15 @@ import {
   Image,
   Alert,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  ImageBackground
 } from "react-native";
 // import Header from "../Components/Header";
 import ReactorGrowFinal2 from "../assets/ReactorGrowFinal2.png";
 import { Header, Left, Right, Icon, ActionSheet } from "native-base";
+import { withTheme } from "react-native-elements";
 
 export default class HomeScreen extends React.Component {
-  // static navigationOptions = {
-  //   header: null
-  // };
   state = {
     username: "",
     password: ""
@@ -29,9 +28,9 @@ export default class HomeScreen extends React.Component {
   };
   checkLogin() {
     const { username, password } = this.state;
-    console.log(username, password);
-    if (username == "admin" && password == "admin") {
-      this.props.navigation.navigate("MyGarden");
+    if (username == "a" && password == "a") {
+      console.log(this.props.navigation, "<<<<<");
+      this.props.navigation.navigate("Garden");
     } else {
       Alert.alert("Error", "Username or Password is not correct", [
         { text: "Okay" }
@@ -68,9 +67,11 @@ export default class HomeScreen extends React.Component {
             <Icon name="menu" onPress={() => openDrawer()} />
           </Right>
         </Header>
+        {/* <ImageBackground source={require(bg.jpg)}> */}
         <View style={styles.container}>
           <Image source={ReactorGrowFinal2} style={styles.image} />
         </View>
+        <View style={styles.overlay}></View>
         <View style={{ padding: 150, alignItems: "center" }}>
           <View
             style={{
@@ -79,7 +80,7 @@ export default class HomeScreen extends React.Component {
               paddingBottom: 200
             }}
           >
-            <Text style={styles.text}>Welcome to your garden!</Text>
+            {/* <Text style={styles.text}>Welcome to your garden!</Text> */}
             <Text style={styles.text}>Login into your account</Text>
             <TextInput
               placeholder="email"
@@ -93,15 +94,19 @@ export default class HomeScreen extends React.Component {
               onChangeText={text => this.setState({ password: text })}
             />
             <View>
-              <Button
-                color="purple"
-                title="LogIn"
-                style={{ borderRadius: 100 }}
+              <TouchableOpacity
+                style={styles.button}
                 onPress={() => this.checkLogin()}
-              />
+              >
+                <Text style={styles.text}>Log In</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.text}>Register</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
+        {/* </ImageBackground> */}
       </>
     );
   }
@@ -127,14 +132,18 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
-    color: "white",
+    color: "black",
     fontSize: 24,
     fontWeight: "bold"
   },
   button: {
-    backgroundColor: "blue",
-    paddingBottom: 100,
-    color: "white"
+    color: "black",
+    backgroundColor: "#d4fc79",
+    borderRadius: 10,
+    padding: 10
+    // flex: 1,
+    // flexDirection: "column"
+    // justifyContent: "space-between"
   },
   image: {
     alignItems: "center",

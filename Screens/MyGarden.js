@@ -50,7 +50,7 @@ class MyGarden extends React.Component {
                 style={styles.image}
                 source={require("../assets/greenhouse.jpg")}
               >
-                <Text style={styles.text} onPress={() => navigate("MyPlants")}>
+                <Text style={styles.text} onPress={() => navigate("Plants")}>
                   My Garden
                 </Text>
               </ImageBackground>
