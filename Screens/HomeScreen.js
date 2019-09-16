@@ -55,7 +55,12 @@ export default class HomeScreen extends React.Component {
               alignItems: "center"
             }}
           >
-            <Text style={{ fontWeight: "bold", fontSize: 24 }}>
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 24
+              }}
+            >
               Reactor Grow
             </Text>
           </View>

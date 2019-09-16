@@ -170,8 +170,7 @@ const DrawerNavigator = createDrawerNavigator(
   },
   {
     hideStatusBar: true,
-    drawerBackgroundColor: "rgba(255, 255, 255, 9)",
-    overlayColor: "#6b52ae",
+    drawerBackgroundColor: "#d4fc79",
     drawerWidth: width * 0.3,
     contentOptions: {
       activeTintColor: "green"

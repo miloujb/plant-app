@@ -17,17 +17,27 @@ class MyGarden extends React.Component {
       <>
         <Header
           style={{
-            paddingTop: 100,
             margin: "auto",
             backgroundColor: "#d4fc79"
           }}
         >
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 24
+              }}
+            >
+              Reactor Grow
+            </Text>
+          </View>
           <Right>
-            <Icon
-              style={{ paddingBottom: 50 }}
-              name="menu"
-              onPress={() => openDrawer()}
-            />
+            <Icon name="menu" onPress={() => openDrawer()} />
           </Right>
         </Header>
         <ImageBackground
