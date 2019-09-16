@@ -28,7 +28,6 @@ export default class HomeScreen extends React.Component {
   checkLogin() {
     const { username, password } = this.state;
     if (username == "a" && password == "a") {
-      console.log(this.props.navigation, "<<<<<");
       this.props.navigation.navigate("Garden");
       this.setState({ password: "", username: "" });
     } else {

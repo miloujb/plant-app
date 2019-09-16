@@ -9,82 +9,103 @@ import {
 } from "react-native";
 // import Header from "../Components/Header";
 import { Header, Left, Right, Icon } from "native-base";
+import { getAllData } from "../api";
 
 class MyGarden extends React.Component {
+  state = {
+    isLoading: true,
+    data: []
+  };
   render() {
+    const { data, isLoading } = this.state;
     const { navigate, openDrawer } = this.props.navigation;
-    return (
-      <>
-        <Header
-          style={{
-            margin: "auto",
-            backgroundColor: "#d4fc79"
-          }}
-        >
-          <View
+    console.log(data);
+    if (data !== undefined && isLoading === false) {
+      return (
+        <>
+          <Header
             style={{
-              justifyContent: "center",
-              alignItems: "center"
+              margin: "auto",
+              backgroundColor: "#d4fc79"
             }}
           >
-            <Text
+            <View
               style={{
-                fontWeight: "bold",
-                fontSize: 24
+                justifyContent: "center",
+                alignItems: "center"
               }}
             >
-              Reactor Grow
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  fontSize: 24
+                }}
+              >
+                Reactor Grow
+              </Text>
+            </View>
+            <Right>
+              <Icon name="menu" onPress={() => openDrawer()} />
+            </Right>
+          </Header>
+          <View style={styles.topHalf}>
+            <Text style={{ fontSize: 30, fontWeight: "500" }}>
+              Temp: {data[0].temp_inside}
+            </Text>
+            <Text style={{ fontSize: 30, fontWeight: "500" }}>
+              Hum: {data[0].humidity}
             </Text>
           </View>
-          <Right>
-            <Icon name="menu" onPress={() => openDrawer()} />
-          </Right>
-        </Header>
-        <ImageBackground
-          source={require("../images/background.jpg")}
-          style={((width = "100%"), (height = "100%"))}
-        >
           <View>
-            <View style={styles.container}>
-              <ImageBackground
-                style={styles.image}
-                source={require("../assets/greenhouse.jpg")}
-              >
-                <Text style={styles.text} onPress={() => navigate("Plants")}>
-                  My Garden
-                </Text>
-              </ImageBackground>
-            </View>
+            <Button title="To my plants"></Button>
+            {/* <View style={styles.container}>
+            <ImageBackground
+              style={styles.image}
+              source={require("../assets/greenhouse.jpg")}
+            >
+              <Text style={styles.text} onPress={() => navigate("Plants")}>
+                My Garden
+              </Text>
+            </ImageBackground>
+          </View> */}
           </View>
-        </ImageBackground>
-      </>
-    );
+        </>
+      );
+    } else {
+      return null;
+    }
   }
+  componentDidMount = () => {
+    this.fetchAllData();
+  };
+
+  fetchAllData = () => {
+    getAllData()
+      .then(data => {
+        console.log(data, "plant");
+        this.setState({ data, isLoading: false });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 }
 
 const styles = StyleSheet.create({
   image: {
-    width: 275,
-    height: 275,
+    width: 350,
+    height: 350,
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center"
   },
   container: {
-    paddingTop: 225,
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
     // left: 0,
     // top: 0
-  },
-  input: {
-    width: 300,
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 20
   },
   text: {
     fontSize: 24,
@@ -99,6 +120,11 @@ const styles = StyleSheet.create({
     padding: 50,
     borderRadius: 50,
     backgroundColor: "#23b11b"
+  },
+  topHalf: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between"
   }
 });
 
