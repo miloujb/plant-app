@@ -7,18 +7,33 @@ import {
   Image,
   ImageBackground
 } from "react-native";
-import Header from "../Components/Header";
+// import Header from "../Components/Header";
+import { Header, Left, Right, Icon } from "native-base";
 
 class MyGarden extends React.Component {
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate, openDrawer } = this.props.navigation;
     return (
       <>
+        <Header
+          style={{
+            paddingTop: 100,
+            margin: "auto",
+            backgroundColor: "#d4fc79"
+          }}
+        >
+          <Right>
+            <Icon
+              style={{ paddingBottom: 50 }}
+              name="menu"
+              onPress={() => openDrawer()}
+            />
+          </Right>
+        </Header>
         <ImageBackground
           source={require("../images/background.jpg")}
           style={((width = "100%"), (height = "100%"))}
         >
-          <Header />
           <View>
             <View style={styles.container}>
               <ImageBackground

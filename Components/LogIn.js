@@ -8,7 +8,7 @@ import {
   ImageBackground,
   Alert
 } from "react-native";
-import Header from "../Components/Header";
+import Header from "./AppHeader";
 import { withTheme } from "react-native-elements";
 
 export default class LogInScreen extends React.Component {

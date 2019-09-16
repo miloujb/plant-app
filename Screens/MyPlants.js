@@ -1,6 +1,14 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, FlatList, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  Image,
+  ImageBackground
+} from "react-native";
 import { getAllData } from "../api";
+import { Header, Left, Right, Icon } from "native-base";
 
 class MyPlants extends Component {
   state = {
@@ -9,17 +17,39 @@ class MyPlants extends Component {
   };
   render() {
     const { data, isLoading } = this.state;
+    const { navigate, openDrawer } = this.props.navigation;
+    if (isLoading) return <Text>Loading...</Text>;
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={data}
-          renderItem={({ item }) => (
-            <View>
-              <Text style={styles.text}>Id: {item.id} Humidity: {item.humidity}</Text>
-            </View>
-          )}
-        />
-      </View>
+      <>
+        <Header
+          style={{
+            paddingTop: 100,
+            margin: "auto",
+            backgroundColor: "#d4fc79"
+          }}
+        >
+          <Right>
+            <Icon
+              style={{ paddingBottom: 50 }}
+              name="menu"
+              onPress={() => openDrawer()}
+            />
+          </Right>
+        </Header>
+
+        <View style={styles.container}>
+          <FlatList
+            data={data}
+            renderItem={({ item }) => (
+              <View>
+                <Text style={styles.text}>
+                  Id: {item.id} Humidity: {item.humidity}
+                </Text>
+              </View>
+            )}
+          />
+        </View>
+      </>
     );
   }
 
@@ -30,7 +60,7 @@ class MyPlants extends Component {
   fetchAllData = () => {
     getAllData()
       .then(data => {
-        console.log(data, 'plant');
+        console.log(data, "plant");
         this.setState({ data, isLoading: false });
       })
       .catch(error => {

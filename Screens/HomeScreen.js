@@ -4,15 +4,14 @@ import {
   View,
   Text,
   Button,
-  TextInput,
-  ImageBackground,
   Image,
   Alert,
+  TextInput,
   TouchableOpacity
 } from "react-native";
-import Header from "../Components/Header";
-import { withTheme } from "react-native-elements";
+// import Header from "../Components/Header";
 import ReactorGrowFinal2 from "../assets/ReactorGrowFinal2.png";
+import { Header, Left, Right, Icon, ActionSheet } from "native-base";
 
 export default class HomeScreen extends React.Component {
   // static navigationOptions = {
@@ -24,10 +23,13 @@ export default class HomeScreen extends React.Component {
   };
 
   static navigationOptions = {
-    header: null
+    drawerIcon: ({ tintColor }) => {
+      <Icon name="home" style={{ fontSize: 24, color: tintColor }}></Icon>;
+    }
   };
   checkLogin() {
     const { username, password } = this.state;
+    console.log(username, password);
     if (username == "admin" && password == "admin") {
       this.props.navigation.navigate("MyGarden");
     } else {
@@ -36,34 +38,64 @@ export default class HomeScreen extends React.Component {
       ]);
     }
   }
+
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate, openDrawer } = this.props.navigation;
     return (
       <>
-        <Header />
+        <Header
+          style={{
+            margin: "auto",
+            backgroundColor: "#d4fc79"
+          }}
+        >
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Text style={{ fontWeight: "bold", fontSize: 24 }}>
+              Reactor Grow
+            </Text>
+          </View>
+          <Right>
+            <Icon name="menu" onPress={() => openDrawer()} />
+          </Right>
+        </Header>
         <View style={styles.container}>
-          <TouchableOpacity onPress={this.props.navigation.openDrawer}>
-            <Text>Open Drawer</Text>
-          </TouchableOpacity>
-          <Text style={{ fontWeight: "bold", marginTop: 20 }}>Home</Text>
-          <Text>Hi</Text>
-        </View>
-        <View>
           <Image source={ReactorGrowFinal2} style={styles.image} />
         </View>
-        <View>
-          <Button
-            title="LogIn"
-            style={styles.button}
-            onPress={() => this.checkLogin()}
-          />
-        </View>
-        <View>
-          <Button
-            style={styles.signUpButton}
-            title="Sign Up"
-            onPress={() => navigate("MyGarden")}
-          />
+        <View style={{ padding: 150, alignItems: "center" }}>
+          <View
+            style={{
+              flexDirection: "column",
+              justifyContent: "center",
+              paddingBottom: 200
+            }}
+          >
+            <Text style={styles.text}>Welcome to your garden!</Text>
+            <Text style={styles.text}>Login into your account</Text>
+            <TextInput
+              placeholder="email"
+              style={styles.input}
+              onChangeText={text => this.setState({ username: text })}
+            ></TextInput>
+            <TextInput
+              placeholder="password"
+              style={styles.input}
+              secureTextEntry={true}
+              onChangeText={text => this.setState({ password: text })}
+            />
+            <View>
+              <Button
+                color="purple"
+                title="LogIn"
+                style={{ borderRadius: 100 }}
+                onPress={() => this.checkLogin()}
+              />
+            </View>
+          </View>
         </View>
       </>
     );
@@ -73,9 +105,12 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "100%",
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    flexDirection: "column",
+    paddingTop: 150
   },
   input: {
     width: 300,
@@ -92,21 +127,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   button: {
-    padding: 50,
-    paddingBottom: 150,
-    borderRadius: 50,
-    backgroundColor: "#23b11b"
-  },
-  signUpButton: {
-    padding: 50,
-    paddingBottom: 150,
-    borderRadius: 50,
-    backgroundColor: "green"
+    backgroundColor: "blue",
+    paddingBottom: 100,
+    color: "white"
   },
   image: {
     alignItems: "center",
     justifyContent: "center",
-    paddingRight: 200
+    width: 200,
+    height: 200
   }
 });
 
