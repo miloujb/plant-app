@@ -99,7 +99,7 @@ export default class HomeScreen extends React.Component {
               >
                 <Text style={styles.text}>Log In</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} disabled>
                 <Text style={styles.text}>Register</Text>
               </TouchableOpacity>
             </View>
@@ -139,10 +139,8 @@ const styles = StyleSheet.create({
     color: "black",
     backgroundColor: "#d4fc79",
     borderRadius: 10,
-    padding: 10
-    // flex: 1,
-    // flexDirection: "column"
-    // justifyContent: "space-between"
+    padding: 10,
+    margin: 10
   },
   image: {
     alignItems: "center",
