@@ -6,8 +6,7 @@ import HomeScreen from "./Screens/HomeScreen";
 import MyGarden from "./Screens/MyGarden";
 import MyPlants from "./Screens/MyPlants";
 import LogOut from "./Screens/LogOut";
-import LogIn from "./Components/LogIn";
-import { View } from "native-base";
+
 import { createDrawerNavigator } from "react-navigation-drawer";
 
 const { width } = Dimensions.get("window");
@@ -171,17 +170,17 @@ const { width } = Dimensions.get("window");
 
 const StackNavigator = createStackNavigator(
   {
-    Home: HomeScreen,
+    HomeScreen: HomeScreen,
     Garden: MyGarden,
     Plants: MyPlants,
     Logout: LogOut
   },
   {
     hideStatusBar: true,
-    drawerBackgroundColor: "#d4fc79",
-    drawerWidth: width * 0.3,
+    drawerBackgroundColor: "#43e97b",
+    drawerWidth: width,
     contentOptions: {
-      activeTintColor: "green"
+      activeTintColor: "white"
     }
   }
 );
@@ -226,12 +225,27 @@ const StackNavigator = createStackNavigator(
 //   }
 // );
 
-const AppDrawerNavigator = createDrawerNavigator({
-  Home: { screen: StackNavigator },
-  Garden: { screen: StackNavigator },
-  Plants: { screen: StackNavigator },
-  Logout: { screen: StackNavigator }
-});
+const AppDrawerNavigator = createDrawerNavigator(
+  {
+    Home: { screen: StackNavigator },
+    Garden: { screen: StackNavigator },
+    Plants: { screen: StackNavigator },
+    Logout: { screen: StackNavigator }
+  },
+  {
+    hideStatusBar: true,
+    drawerBackgroundColor: "#43e97b",
+    drawerWidth: width * 0.5,
+    contentOptions: {
+      activeTintColor: "white",
+      labelStyle: {
+        color: "black",
+        fontSize: 20,
+        textAlign: "center"
+      }
+    }
+  }
+);
 
 const App = createAppContainer(AppDrawerNavigator);
 export default App;

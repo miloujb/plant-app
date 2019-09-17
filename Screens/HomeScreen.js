@@ -22,7 +22,10 @@ export default class HomeScreen extends React.Component {
 
   static navigationOptions = {
     drawerIcon: ({ tintColor }) => {
-      <Icon name="home" style={{ fontSize: 24, color: tintColor }}></Icon>;
+      <Icon
+        name="burger"
+        style={{ fontSize: 24, backgroundColor: "white" }}
+      ></Icon>;
     }
   };
   checkLogin() {
@@ -45,7 +48,7 @@ export default class HomeScreen extends React.Component {
         <Header
           style={{
             margin: "auto",
-            backgroundColor: "#d4fc79"
+            backgroundColor: "white"
           }}
         >
           <View
@@ -54,30 +57,29 @@ export default class HomeScreen extends React.Component {
               alignItems: "center"
             }}
           >
-            <Text
+            {/* <Text
               style={{
                 fontWeight: "bold",
-                fontSize: 24
+                fontSize: 24,
+                color: "black"
               }}
             >
               Reactor Grow
-            </Text>
+            </Text> */}
           </View>
         </Header>
-        {/* <ImageBackground source={require(bg.jpg)}> */}
         <View style={styles.container}>
           <Image source={ReactorGrowFinal2} style={styles.image} />
         </View>
         <View style={styles.overlay}></View>
-        <View style={{ padding: 150, alignItems: "center" }}>
+        <View style={{ padding: 125, alignItems: "center" }}>
           <View
             style={{
               flexDirection: "column",
               justifyContent: "center",
-              paddingBottom: 200
+              paddingBottom: 700
             }}
           >
-            {/* <Text style={styles.text}>Welcome to your garden!</Text> */}
             <Text style={styles.text}>Login into your account</Text>
             <TextInput
               placeholder="John Doe"
@@ -132,12 +134,12 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     color: "black",
+    textShadowColor: "black",
     fontSize: 24,
     fontWeight: "bold"
   },
   button: {
-    color: "black",
-    backgroundColor: "#d4fc79",
+    backgroundColor: "#43e97b",
     borderRadius: 10,
     padding: 10,
     margin: 10
@@ -147,6 +149,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 200,
     height: 200
+  },
+  disabled: {
+    opacity: 0.5
   }
 });
 
