@@ -7,11 +7,11 @@ import {
   Image,
   ImageBackground
 } from "react-native";
-// import Header from "../Components/Header";
+
 import { Header, Left, Right, Icon } from "native-base";
 import { getAllData } from "../api";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
-import bg from "../assets/bg.jpg";
+
 import backgroundimg from "../assets/backgroundimg.jpg";
 import greenhouseplant from "../assets/greenhouseplant.jpg";
 
@@ -245,9 +245,11 @@ class MyGarden extends React.Component {
                           style={styles.button1}
                           onPress={() => this.setWindowStatus()}
                         >
-                          <Text style={styles.text}>Open</Text>
+                          <Text style={styles.text}>Window</Text>
                           <Text style={styles.text}>
-                            {data[data.length - 1].window}
+                            {data[data.length - 1].window === false
+                              ? "Open"
+                              : "Closed"}
                           </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -256,7 +258,9 @@ class MyGarden extends React.Component {
                         >
                           <Text style={styles.text}>Water</Text>
                           <Text style={styles.text}>
-                            {data[data.length - 1].water}
+                            {data[data.length - 1].water === false
+                              ? "Off"
+                              : "On"}
                           </Text>
                         </TouchableOpacity>
                       </View>
