@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Text, Dimensions } from "react-native";
+import { Text, Dimensions, ImageBackground } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import HomeScreen from "./Screens/HomeScreen";
 import MyGarden from "./Screens/MyGarden";
 import MyPlants from "./Screens/MyPlants";
 import LogOut from "./Screens/LogOut";
+import backgroundimg from "./assets/backgroundimg.jpg";
 
 import { createDrawerNavigator } from "react-navigation-drawer";
 
@@ -170,7 +171,7 @@ const { width } = Dimensions.get("window");
 
 const StackNavigator = createStackNavigator(
   {
-    HomeScreen: HomeScreen,
+    Home: HomeScreen,
     Garden: MyGarden,
     Plants: MyPlants,
     Logout: LogOut
@@ -234,14 +235,19 @@ const AppDrawerNavigator = createDrawerNavigator(
   },
   {
     hideStatusBar: true,
-    drawerBackgroundColor: "#43e97b",
+    drawerBackgroundColor: "transparent",
     drawerWidth: width * 0.5,
     contentOptions: {
       activeTintColor: "white",
+      activeBackgroundColor: "transparent",
       labelStyle: {
-        color: "black",
+        borderColor: "white",
+        color: "white",
         fontSize: 20,
         textAlign: "center"
+      },
+      iconContainerStyle: {
+        opacity: 1
       }
     }
   }

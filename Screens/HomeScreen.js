@@ -13,6 +13,7 @@ import {
 // import Header from "../Components/Header";
 import ReactorGrowFinal2 from "../assets/ReactorGrowFinal2.png";
 import { Header, Left, Right, Icon } from "native-base";
+import backgroundimg from "../assets/backgroundimg.jpg";
 
 export default class HomeScreen extends React.Component {
   state = {
@@ -21,6 +22,7 @@ export default class HomeScreen extends React.Component {
   };
 
   static navigationOptions = {
+    header: null,
     drawerIcon: ({ tintColor }) => {
       <Icon
         name="burger"
@@ -45,19 +47,21 @@ export default class HomeScreen extends React.Component {
     const { navigate, openDrawer } = this.props.navigation;
     return (
       <>
-        <Header
-          style={{
-            margin: "auto",
-            backgroundColor: "white"
-          }}
-        >
-          <View
+        <ImageBackground source={backgroundimg} style={styles.background}>
+          <Header
             style={{
-              justifyContent: "center",
-              alignItems: "center"
+              margin: "auto",
+              backgroundColor: "white",
+              opacity: 0
             }}
           >
-            {/* <Text
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              {/* <Text
               style={{
                 fontWeight: "bold",
                 fontSize: 24,
@@ -66,48 +70,49 @@ export default class HomeScreen extends React.Component {
             >
               Reactor Grow
             </Text> */}
+            </View>
+          </Header>
+          <View style={styles.container}>
+            <Image source={ReactorGrowFinal2} style={styles.image} />
           </View>
-        </Header>
-        <View style={styles.container}>
-          <Image source={ReactorGrowFinal2} style={styles.image} />
-        </View>
-        <View style={styles.overlay}></View>
-        <View style={{ padding: 125, alignItems: "center" }}>
-          <View
-            style={{
-              flexDirection: "column",
-              justifyContent: "center",
-              paddingBottom: 700
-            }}
-          >
-            <Text style={styles.text}>Login into your account</Text>
-            <TextInput
-              placeholder="John Doe"
-              style={styles.input}
-              value={username}
-              onChangeText={text => this.setState({ username: text })}
-            ></TextInput>
-            <TextInput
-              placeholder="your password"
-              style={styles.input}
-              secureTextEntry={true}
-              value={password}
-              onChangeText={text => this.setState({ password: text })}
-            />
-            <View>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => this.checkLogin()}
-              >
-                <Text style={styles.text}>Log In</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} disabled>
-                <Text style={styles.text}>Register</Text>
-              </TouchableOpacity>
+          <View style={styles.overlay}></View>
+          <View style={{ padding: 160, alignItems: "center" }}>
+            <View
+              style={{
+                flexDirection: "column",
+                justifyContent: "center",
+                paddingBottom: 200
+              }}
+            >
+              <Text style={styles.text}>Login into your account</Text>
+              <TextInput
+                placeholder="John Doe"
+                style={styles.input}
+                value={username}
+                onChangeText={text => this.setState({ username: text })}
+              ></TextInput>
+              <TextInput
+                placeholder="your password"
+                style={styles.input}
+                secureTextEntry={true}
+                value={password}
+                onChangeText={text => this.setState({ password: text })}
+              />
+              <View>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => this.checkLogin()}
+                >
+                  <Text style={styles.text}>Log In</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} disabled>
+                  <Text style={styles.text}>Register</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-        {/* </ImageBackground> */}
+          {/* </ImageBackground> */}
+        </ImageBackground>
       </>
     );
   }
@@ -120,39 +125,49 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "column",
-    paddingTop: 150
+    flexDirection: "column"
+    // paddingTop: 50
   },
   input: {
     width: 300,
     borderBottomColor: "black",
     borderWidth: 1,
+    borderRadius: 20,
     padding: 10,
-    marginBottom: 20,
-    backgroundColor: "white"
+    opacity: 1,
+    borderColor: "grey",
+    marginBottom: 20
+    // backgroundColor: "white"
   },
   text: {
     textAlign: "center",
-    color: "black",
+    color: "white",
     textShadowColor: "black",
     fontSize: 24,
     fontWeight: "bold"
   },
   button: {
-    backgroundColor: "#43e97b",
-    borderRadius: 10,
+    // backgroundColor: "lightgrey",
+    borderRadius: 20,
+    borderColor: "grey",
+    borderWidth: 1,
     padding: 10,
-    margin: 10
+    margin: 10,
+    opacity: 1
   },
   image: {
+    marginTop: 150,
     alignItems: "center",
     justifyContent: "center",
-    width: 200,
-    height: 200
+    width: 125,
+    height: 125,
+    borderRadius: 90,
+    opacity: 0.8
   },
   disabled: {
     opacity: 0.5
-  }
+  },
+  background: {}
 });
 
 /*<ImageBackground
