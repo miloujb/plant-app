@@ -10,22 +10,12 @@ import { createDrawerNavigator } from "react-navigation-drawer";
 
 const { width } = Dimensions.get("window");
 
-const StackNavigator = createStackNavigator(
-  {
-    Home: HomeScreen,
-    Garden: MyGarden,
-    Plants: MyPlants,
-    Logout: LogOut
-  },
-  {
-    hideStatusBar: true,
-    drawerBackgroundColor: "#43e97b",
-    drawerWidth: width,
-    contentOptions: {
-      activeTintColor: "white"
-    }
-  }
-);
+const StackNavigator = createStackNavigator({
+  Home: HomeScreen,
+  Garden: MyGarden,
+  Plants: MyPlants,
+  Logout: LogOut
+});
 
 const AppDrawerNavigator = createDrawerNavigator(
   {
@@ -36,7 +26,7 @@ const AppDrawerNavigator = createDrawerNavigator(
   },
   {
     hideStatusBar: true,
-    drawerBackgroundColor: "transparent",
+    drawerBackgroundColor: "rgba(52, 151, 36, 0.1)",
     drawerWidth: width * 0.5,
     contentOptions: {
       activeTintColor: "white",

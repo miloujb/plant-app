@@ -7,6 +7,7 @@ import bg from "../assets/bg.jpg";
 import snapdragon from "../assets/snapdragon.jpg";
 import pineapple from "../assets/pineapple.jpg";
 import pineberry from "../assets/pineberry.jpg";
+import greenhouseplant from "../assets/greenhouseplant.jpg";
 import loading from "../assets/loading.gif";
 
 class MyPlants extends Component {
@@ -83,6 +84,13 @@ class MyPlants extends Component {
                     My Plants
                   </Text>
                   <View style={styles.plants}>
+                    <View style={styles.plants}>
+                      <Text style={styles.text}>Cactus</Text>
+                      <Image
+                        source={greenhouseplant}
+                        style={styles.image}
+                      ></Image>
+                    </View>
                     <View style={styles.plants}>
                       <Text style={styles.text}>Snapdragon</Text>
                       <Image source={snapdragon} style={styles.image}></Image>

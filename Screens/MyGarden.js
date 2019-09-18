@@ -13,7 +13,7 @@ import { getAllData } from "../api";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import bg from "../assets/bg.jpg";
 import backgroundimg from "../assets/backgroundimg.jpg";
-import snapdragon from "../assets/snapdragon.jpg";
+import greenhouseplant from "../assets/greenhouseplant.jpg";
 
 class MyGarden extends React.Component {
   static navigationOptions = {
@@ -47,6 +47,10 @@ class MyGarden extends React.Component {
     if (window === false) {
       this.setState({ window: true });
     }
+  }
+
+  refreshPage() {
+    this.fetchAllData();
   }
 
   render() {
@@ -189,6 +193,38 @@ class MyGarden extends React.Component {
                         </View>
                       </View>
                     </View>
+                    <View style={styles.readings}>
+                      <View>
+                        <Text
+                          style={{
+                            textAlign: "left",
+                            fontWeight: "bold",
+                            color: "white"
+                          }}
+                        >
+                          Last reading:
+                        </Text>
+                        <Text
+                          style={{
+                            fontSize: 15,
+                            fontWeight: "500",
+                            color: "white"
+                          }}
+                        >
+                          {data[data.length - 1].created_at.slice(0, 19)}
+                        </Text>
+                      </View>
+                      <View>
+                        <TouchableOpacity
+                          style={styles.refreshButton}
+                          onPress={() => this.refreshPage()}
+                        >
+                          <Text style={{ fontSize: 20, color: "white" }}>
+                            Refresh
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
                     <View style={styles.bottom}>
                       <Text
                         style={{
@@ -198,9 +234,12 @@ class MyGarden extends React.Component {
                           marginBottom: 20
                         }}
                       >
-                        Snapdragon
+                        Cactus
                       </Text>
-                      <Image style={styles.plant} source={snapdragon}></Image>
+                      <Image
+                        style={styles.plant}
+                        source={greenhouseplant}
+                      ></Image>
                       <View style={styles.wrap1}>
                         <TouchableOpacity
                           style={styles.button1}
@@ -309,6 +348,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column"
+  },
+  refreshButton: {
+    borderRadius: 100,
+    borderColor: "grey",
+    borderWidth: 1,
+    padding: 10,
+    opacity: 1,
+    justifyContent: "flex-end"
+  },
+  readings: {
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "space-between"
   }
 });
 
