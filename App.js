@@ -10,6 +10,15 @@ import { createDrawerNavigator } from "react-navigation-drawer";
 
 const { width } = Dimensions.get("window");
 
+// const Home = createStackNavigator(
+//   {
+//     Home: HomeScreen
+//   },
+//   {
+//     edgeWidth: 0
+//   }
+// );
+
 const StackNavigator = createStackNavigator({
   Home: HomeScreen,
   Garden: MyGarden,
@@ -24,6 +33,7 @@ const AppDrawerNavigator = createDrawerNavigator(
     Plants: { screen: StackNavigator },
     Logout: { screen: StackNavigator }
   },
+
   {
     hideStatusBar: true,
     drawerBackgroundColor: "rgba(52, 151, 36, 0.1)",

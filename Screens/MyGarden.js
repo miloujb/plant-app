@@ -234,7 +234,7 @@ class MyGarden extends React.Component {
                           marginBottom: 20
                         }}
                       >
-                        Cactus
+                        Aloe
                       </Text>
                       <Image
                         style={styles.plant}
@@ -246,14 +246,18 @@ class MyGarden extends React.Component {
                           onPress={() => this.setWindowStatus()}
                         >
                           <Text style={styles.text}>Open</Text>
-                          <Text style={styles.text}>Window</Text>
+                          <Text style={styles.text}>
+                            {data[data.length - 1].window}
+                          </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                           style={styles.button}
                           onPress={() => this.setWaterStatus()}
                         >
                           <Text style={styles.text}>Water</Text>
-                          <Text style={styles.text}>On</Text>
+                          <Text style={styles.text}>
+                            {data[data.length - 1].water}
+                          </Text>
                         </TouchableOpacity>
                       </View>
                     </View>

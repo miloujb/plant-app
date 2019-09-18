@@ -85,7 +85,7 @@ class MyPlants extends Component {
                   </Text>
                   <View style={styles.plants}>
                     <View style={styles.plants}>
-                      <Text style={styles.text}>Cactus</Text>
+                      <Text style={styles.text}>Aloe</Text>
                       <Image
                         source={greenhouseplant}
                         style={styles.image}
