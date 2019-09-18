@@ -13,34 +13,53 @@ import { getAllData } from "../api";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import bg from "../assets/bg.jpg";
 import backgroundimg from "../assets/backgroundimg.jpg";
+import snapdragon from "../assets/snapdragon.jpg";
 
 class MyGarden extends React.Component {
   static navigationOptions = {
-    // header: null,
-    // drawerIcon: ({ tintColor }) => {
-    //   <Icon
-    //     name="burger"
-    //     style={{ fontSize: 24, backgroundColor: "white" }}
-    //   ></Icon>;
-    // }
+    header: null,
+    headerTransparent: true,
+    drawerIcon: ({ tintColor }) => {
+      <Icon
+        name="burger"
+        style={{ fontSize: 24, backgroundColor: "white" }}
+      ></Icon>;
+    }
   };
   state = {
     isLoading: true,
-    data: [],
-    window: "closed",
-    hose: "off"
+    data: [{ water: "false", window: "false" }]
   };
+
+  setWaterStatus() {
+    const {
+      data: { water }
+    } = this.state;
+    if (water === false) {
+      this.setState({ water: true });
+    }
+  }
+
+  setWindowStatus() {
+    const {
+      data: { window }
+    } = this.state;
+    if (window === false) {
+      this.setState({ window: true });
+    }
+  }
+
   render() {
-    console.log(new Date(Date.now()).toString());
-    console.log(new Date(Date.now()));
     const { data, isLoading } = this.state;
     const { navigate, openDrawer } = this.props.navigation;
     if (isLoading)
       return (
-        <Image
-          source={require("../images/hamster.gif")}
-          styles={styles.hamster}
-        />
+        <View style={styles.loader}>
+          <Image
+            source={require("../assets/loading.gif")}
+            styles={styles.loading}
+          />
+        </View>
       );
     if (data !== undefined && isLoading === false) {
       return (
@@ -51,7 +70,8 @@ class MyGarden extends React.Component {
                 style={{
                   margin: "auto",
                   backgroundColor: "transparent",
-                  opacity: 1
+                  opacity: 1,
+                  marginTop: 40
                 }}
               >
                 <View
@@ -70,9 +90,13 @@ class MyGarden extends React.Component {
                     Reactor Grow
                   </Text>
                 </View>
-                {/* <Right>
-                  <Icon name="menu" onPress={() => openDrawer()} />
-                </Right> */}
+                <Right>
+                  <Icon
+                    name="menu"
+                    style={{ color: "white" }}
+                    onPress={() => openDrawer()}
+                  />
+                </Right>
               </Header>
               <View style={styles.topHalf}>
                 <View style={styles.wrap}>
@@ -88,7 +112,7 @@ class MyGarden extends React.Component {
                           color: "white"
                         }}
                       >
-                        {data[data.length - 1].temp_inside + "°C"}
+                        {data[data.length - 1].temp_inside.toFixed(1) + "°C"}
                       </Text>
                     </View>
                     <View>
@@ -108,7 +132,7 @@ class MyGarden extends React.Component {
                           color: "white"
                         }}
                       >
-                        {data[data.length - 1].humidity + "%"}
+                        {data[data.length - 1].humidity.toFixed(1) + "%"}
                       </Text>
                     </View>
                   </View>
@@ -118,11 +142,17 @@ class MyGarden extends React.Component {
                   </View>
                 </View>
                 <View style={styles.bottomHalf}>
-                  <View style={styles.wrap}>
+                  <View>
                     <View style={styles.wrap}>
                       <View style={styles.BottomRight}>
                         <View style={styles.soil}>
-                          <Text style={{ fontWeight: "bold", color: "white" }}>
+                          <Text
+                            style={{
+                              fontWeight: "bold",
+                              color: "white",
+                              textAlign: "right"
+                            }}
+                          >
                             Soil Moisture:
                           </Text>
                           <Text
@@ -132,7 +162,9 @@ class MyGarden extends React.Component {
                               color: "white"
                             }}
                           >
-                            {data[data.length - 1].soil_moist}
+                            {(data[data.length - 1].soil_moist / 1000).toFixed(
+                              1
+                            ) + "%"}
                           </Text>
                         </View>
                         <View>
@@ -140,7 +172,7 @@ class MyGarden extends React.Component {
                             style={{
                               fontWeight: "bold",
                               color: "white",
-                              textAlign: "right"
+                              textAlign: "left"
                             }}
                           >
                             Outside Temp:
@@ -152,7 +184,7 @@ class MyGarden extends React.Component {
                               color: "white"
                             }}
                           >
-                            {data[data.length - 1].temp_out + "°C"}
+                            {data[data.length - 1].temp_out.toFixed(1) + "°C"}
                           </Text>
                         </View>
                       </View>
@@ -162,20 +194,29 @@ class MyGarden extends React.Component {
                         style={{
                           fontSize: 40,
                           fontWeight: "500",
-                          color: "white"
+                          color: "white",
+                          marginBottom: 20
                         }}
                       >
                         Snapdragon
                       </Text>
-                      <Image style={styles.plant} source={bg}></Image>
+                      <Image style={styles.plant} source={snapdragon}></Image>
                       <View style={styles.wrap1}>
-                        <TouchableOpacity style={styles.button1}>
-                          <Text style={styles.text}>Open Window</Text>
+                        <TouchableOpacity
+                          style={styles.button1}
+                          onPress={() => this.setWindowStatus()}
+                        >
+                          <Text style={styles.text}>Open</Text>
+                          <Text style={styles.text}>Window</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          style={styles.button}
+                          onPress={() => this.setWaterStatus()}
+                        >
+                          <Text style={styles.text}>Water</Text>
+                          <Text style={styles.text}>On</Text>
                         </TouchableOpacity>
                       </View>
-                      <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>Water On</Text>
-                      </TouchableOpacity>
                     </View>
                   </View>
                 </View>
@@ -205,126 +246,70 @@ class MyGarden extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  // image: {
-  //   width: 350,
-  //   height: 350,
-  //   flexGrow: 1,
-  //   justifyContent: "center",
-  //   alignItems: "center"
-  // },
-  //   // container: {
-  //   //   flex: 1,
-  //   //   backgroundColor: "#fff",
-  //   //   flexDirection: "row",
-  //   //   flexWrap: "wrap"
-  //   //   // left: 0,
-  //   //   // top: 0
-  //   // },
   text: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "white"
-    //     textAlign: "center",
-    //     justifyContent: "center"
-    //     // position: "absolute",
-    //     // bottom: 0
-    //     // right: 0
+    color: "white",
+    textAlign: "center"
   },
   button: {
-    // borderRadius: 50,
-    // backgroundColor: "#d4fc79",
-    // margin: 0,
-    // width: "100%",
-    borderRadius: 20,
+    borderRadius: 100,
     borderColor: "grey",
     borderWidth: 1,
-    padding: 10,
+    padding: 20,
     margin: 10,
     opacity: 1
   },
   button1: {
-    borderRadius: 20,
+    borderRadius: 100,
     borderColor: "grey",
     borderWidth: 1,
-    padding: 10,
+    padding: 20,
     margin: 10,
     opacity: 1
   },
   topHalf: {
     flex: 1,
     flexDirection: "column",
-    borderWidth: 5,
-    margin: 10,
-    paddingBottom: 20
-    // marginBottom: 20
+    margin: 10
   },
-  touchable: {
-    color: "black",
-    borderRadius: 30,
-    paddingBottom: 20
-    // justifyContent: "flex-end"
-  },
+
   temperature: {
     borderWidth: 2,
-    borderColor: "orange",
-    borderTopColor: "grey",
+    borderColor: "transparent",
+    borderBottomColor: "grey",
     textAlign: "right",
     flexDirection: "row",
     justifyContent: "space-between"
   },
-  //   icons: {
-  //     borderWidth: 2,
-  //     borderColor: "red"
-  //   },
-  //   wrap: {
-  //     borderWidth: 2,
-  //     borderColor: "blue",
-  //     // flexWrap: "wrap",
-  //     flexDirection: "row-reverse",
-  //     justifyContent: "space-between"
-  //   },
-  //   wrap1: {
-  //     justifyContent: "center"
-  //   },
-  BottomRight: {
-    borderWidth: 2,
-    borderColor: "pink",
+  wrap1: {
     flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center"
+  },
+  BottomRight: {
+    flexDirection: "row-reverse",
     justifyContent: "space-between"
   },
   bottom: {
-    borderWidth: 2,
-    color: "yellow",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 100,
-    paddingBottom: 120
+    marginTop: 50
   },
-  //   bottomHalf: {
-  //     flex: 1,
-  //     flexDirection: "column",
-  //     borderWidth: 5,
-  //     paddingTop: 80
-  //     // margin: 10
-  //   },
+
   plant: {
     height: 200,
     width: 200,
-    borderRadius: 100
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "white"
   },
-  background: {}
-  //   soil: {
-  //     flexDirection: "column",
-  //     alignItems: "center",
-  //     textAlign: "center"
-  //   },
-  //   hamster: {
-  //     width: 250,
-  //     height: 250,
-  //     flex: 1,
-  //     justifyContent: "center",
-  //     alignItems: "center"
-  //   }
+  background: { width: "100%", height: "100%" },
+  loader: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column"
+  }
 });
 
 export default MyGarden;

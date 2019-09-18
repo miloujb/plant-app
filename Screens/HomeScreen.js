@@ -3,21 +3,20 @@ import {
   StyleSheet,
   View,
   Text,
-  Button,
   Image,
   Alert,
   TextInput,
   TouchableOpacity,
   ImageBackground
 } from "react-native";
-// import Header from "../Components/Header";
+
 import ReactorGrowFinal2 from "../assets/ReactorGrowFinal2.png";
 import { Header, Left, Right, Icon } from "native-base";
 import backgroundimg from "../assets/backgroundimg.jpg";
 
 export default class HomeScreen extends React.Component {
   state = {
-    username: "",
+    email: "",
     password: ""
   };
 
@@ -31,19 +30,18 @@ export default class HomeScreen extends React.Component {
     }
   };
   checkLogin() {
-    const { username, password } = this.state;
-    if (username == "a" && password == "a") {
+    const { email, password } = this.state;
+    if (email == "a" && password == "a") {
+      console.log("hello");
       this.props.navigation.navigate("Garden");
-      this.setState({ password: "", username: "" });
+      this.setState({ password: "", email: "" });
     } else {
-      Alert.alert("Error", "Username or Password is not correct", [
-        { text: "Okay" }
-      ]);
+      Alert.alert("Error", "Incorrect email or password", [{ text: "Okay" }]);
     }
   }
 
   render() {
-    const { password, username } = this.state;
+    const { password, email } = this.state;
     const { navigate, openDrawer } = this.props.navigation;
     return (
       <>
@@ -52,7 +50,8 @@ export default class HomeScreen extends React.Component {
             style={{
               margin: "auto",
               backgroundColor: "white",
-              opacity: 0
+              opacity: 0,
+              marginTop: 40
             }}
           >
             <View
@@ -60,17 +59,7 @@ export default class HomeScreen extends React.Component {
                 justifyContent: "center",
                 alignItems: "center"
               }}
-            >
-              {/* <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 24,
-                color: "black"
-              }}
-            >
-              Reactor Grow
-            </Text> */}
-            </View>
+            ></View>
           </Header>
           <View style={styles.container}>
             <Image source={ReactorGrowFinal2} style={styles.image} />
@@ -84,15 +73,15 @@ export default class HomeScreen extends React.Component {
                 paddingBottom: 200
               }}
             >
-              <Text style={styles.text}>Login into your account</Text>
+              <Text style={styles.text}>Log into your account</Text>
               <TextInput
-                placeholder="John Doe"
+                placeholder="example@example.com"
                 style={styles.input}
-                value={username}
-                onChangeText={text => this.setState({ username: text })}
+                value={email}
+                onChangeText={text => this.setState({ email: text })}
               ></TextInput>
               <TextInput
-                placeholder="your password"
+                placeholder="password"
                 style={styles.input}
                 secureTextEntry={true}
                 value={password}
@@ -111,7 +100,6 @@ export default class HomeScreen extends React.Component {
               </View>
             </View>
           </View>
-          {/* </ImageBackground> */}
         </ImageBackground>
       </>
     );
@@ -136,8 +124,9 @@ const styles = StyleSheet.create({
     padding: 10,
     opacity: 1,
     borderColor: "grey",
-    marginBottom: 20
-    // backgroundColor: "white"
+    marginBottom: 20,
+    textAlign: "center",
+    color: "white"
   },
   text: {
     textAlign: "center",
@@ -147,7 +136,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   button: {
-    // backgroundColor: "lightgrey",
     borderRadius: 20,
     borderColor: "grey",
     borderWidth: 1,
@@ -162,55 +150,12 @@ const styles = StyleSheet.create({
     width: 125,
     height: 125,
     borderRadius: 90,
-    opacity: 0.8
+    opacity: 0.8,
+    borderWidth: 3,
+    borderColor: "lightblue"
   },
   disabled: {
     opacity: 0.5
   },
-  background: {}
+  background: { width: "100%", height: "100%" }
 });
-
-/*<ImageBackground
-source={require("../images/background.jpg")}
-style={((width = "100%"), (height = "100%"))}
->
-<View>
-  <Header />
-</View>
-<View style={{ padding: 100, alignItems: "center" }}>
-  <View
-    style={{
-      flexDirection: "column",
-      justifyContent: "center"
-    }}
-  >
-    <Text style={styles.text}>Welcome to your garden!</Text>
-    <Text style={styles.text}>Login into your account</Text>
-    <TextInput
-      placeholder="email"
-      style={styles.input}
-      onChangeText={text => this.setState({ username: text })}
-    ></TextInput>
-    <TextInput
-      placeholder="password"
-      style={styles.input}
-      secureTextEntry={true}
-      onChangeText={text => this.setState({ password: text })}
-    />
-    <View>
-      <Button
-        title="LogIn"
-        style={styles.button}
-        onPress={() => this.checkLogin()}
-      />
-    </View>
-    <View>
-      <Button
-        style={styles.signUpButton}
-        title="Sign Up"
-        onPress={() => navigate("MyGarden")}
-      />
-    </View>
-  </View>
-</View>
-</ImageBackground>*/
