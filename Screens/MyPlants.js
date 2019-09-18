@@ -64,7 +64,7 @@ class MyPlants extends Component {
             </Header>
             <View>
               <View style={styles.button}>
-                <TouchableOpacity>
+                <TouchableOpacity disabled={true}>
                   <Text style={styles.buttonText}>Add New Plant</Text>
                 </TouchableOpacity>
               </View>
