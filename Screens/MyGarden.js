@@ -28,25 +28,24 @@ class MyGarden extends React.Component {
   };
   state = {
     isLoading: true,
-    data: [{ water: "false", window: "false" }]
+    water: false,
+    window: null,
+    data: [{ water: false, window: false }]
   };
 
   setWaterStatus() {
-    const {
-      data: { water }
-    } = this.state;
-    if (water === false) {
-      this.setState({ water: true });
-    }
+    const { water } = this.state;
+    this.setState(currentState => {
+      return { water: !currentState.water };
+    });
   }
 
   setWindowStatus() {
-    const {
-      data: { window }
-    } = this.state;
-    if (window === false) {
-      this.setState({ window: true });
-    }
+    const { window } = this.state;
+    this.setState(currentState => {
+      console.log(window);
+      return { window: !currentState.window };
+    });
   }
 
   refreshPage() {
@@ -141,9 +140,7 @@ class MyGarden extends React.Component {
                     </View>
                   </View>
                   <View style={styles.icons}>
-                    {/* <Text>WindowOpen</Text>
-                <Text>WaterOn</Text> */}
-                  </View>
+                                    </View>
                 </View>
                 <View style={styles.bottomHalf}>
                   <View>
@@ -247,9 +244,7 @@ class MyGarden extends React.Component {
                         >
                           <Text style={styles.text}>Window</Text>
                           <Text style={styles.text}>
-                            {data[data.length - 1].window === false
-                              ? "Open"
-                              : "Closed"}
+                            {this.state.window ? "Open" : "Closed"}
                           </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -258,9 +253,7 @@ class MyGarden extends React.Component {
                         >
                           <Text style={styles.text}>Water</Text>
                           <Text style={styles.text}>
-                            {data[data.length - 1].water === false
-                              ? "Off"
-                              : "On"}
+                            {this.state.water ? "Off" : "On"}
                           </Text>
                         </TouchableOpacity>
                       </View>
@@ -283,8 +276,13 @@ class MyGarden extends React.Component {
   fetchAllData = () => {
     getAllData()
       .then(data => {
-        console.log(data, "plant");
-        this.setState({ data, isLoading: false });
+        // console.log(data, "plant");
+        this.setState({
+          data,
+          isLoading: false,
+          water: data[data.length - 1].water,
+          window: data[data.length - 1].window
+        });
       })
       .catch(error => {
         console.log(error);
