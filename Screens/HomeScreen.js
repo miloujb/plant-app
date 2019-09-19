@@ -19,7 +19,8 @@ export default class HomeScreen extends React.Component {
   state = {
     email: "",
     password: "",
-    isLoggedIn: false
+    isLoggedIn: false,
+    isLoading: true
   };
 
   static navigationOptions = {

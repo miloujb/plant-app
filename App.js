@@ -10,14 +10,7 @@ import { createDrawerNavigator } from "react-navigation-drawer";
 
 const { width } = Dimensions.get("window");
 
-// const Home = createStackNavigator(
-//   {
-//     Home: HomeScreen
-//   },
-//   {
-//     edgeWidth: 0
-//   }
-// );
+// const Home = createDrawerNavigator({});
 
 const StackNavigator = createStackNavigator({
   Home: HomeScreen,

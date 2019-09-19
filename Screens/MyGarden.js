@@ -7,15 +7,12 @@ import {
   Image,
   ImageBackground
 } from "react-native";
-
 import { Header, Left, Right, Icon } from "native-base";
 import { getAllData } from "../api";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import backgroundimg from "../assets/backgroundimg.jpg";
 import greenhouseplant from "../assets/greenhouseplant.jpg";
-import snapdragon from "../assets/snapdragon.jpg";
-import pineapple from "../assets/pineapple.jpg";
-import pineberry from "../assets/pineberry.jpg";
+import Loading from "../Components/Loading";
 
 class MyGarden extends React.Component {
   static navigationOptions = {
@@ -37,14 +34,12 @@ class MyGarden extends React.Component {
   };
 
   setWaterStatus() {
-    const { water } = this.state;
     this.setState(currentState => {
       return { water: !currentState.water };
     });
   }
 
   setWindowStatus() {
-    const { window } = this.state;
     this.setState(currentState => {
       return { window: !currentState.window };
     });
@@ -57,15 +52,7 @@ class MyGarden extends React.Component {
   render() {
     const { data, isLoading, image } = this.state;
     const { navigate, openDrawer } = this.props.navigation;
-    if (isLoading)
-      return (
-        <View style={styles.loader}>
-          <Image
-            source={require("../assets/loading.gif")}
-            styles={styles.loading}
-          />
-        </View>
-      );
+    if (isLoading) return <Loading />;
     if (data !== undefined && isLoading === false) {
       return (
         <>
@@ -225,16 +212,7 @@ class MyGarden extends React.Component {
                     </View>
                     <View style={styles.bottom}>
                       <Text
-                        style={{
-                          fontSize: 24,
-                          fontWeight: "500",
-                          color: "white",
-                          marginBottom: 20,
-                          textAlign: "center",
-                          borderColor: "transparent",
-                          borderBottomColor: "lightgrey",
-                          borderWidth: 1
-                        }}
+                        style={styles.myPlantsText}
                         onPress={() => navigate("Plants")}
                       >
                         View my plants
@@ -352,11 +330,6 @@ const styles = StyleSheet.create({
     borderColor: "white"
   },
   background: { width: "100%", height: "100%" },
-  loader: {
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column"
-  },
   refreshButton: {
     borderRadius: 100,
     borderColor: "grey",
@@ -369,6 +342,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     justifyContent: "space-between"
+  },
+  myPlantsText: {
+    fontSize: 24,
+    fontWeight: "500",
+    color: "white",
+    marginBottom: 20,
+    textAlign: "center",
+    borderColor: "transparent",
+    borderBottomColor: "lightgrey",
+    borderWidth: 1
   }
 });
 

@@ -220,6 +220,12 @@ const styles = StyleSheet.create({
     textShadowColor: "black",
     fontSize: 24,
     fontWeight: "bold"
+  },
+  loader: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    top: "35%"
   }
 });
 
