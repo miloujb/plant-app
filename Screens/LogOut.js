@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 class LogOut extends Component {
   render() {
-    return this.props.navigation.navigate("Home");
+    console.log("inside logout");
+    return this.props.navigation.navigate("Home", { isLoggedIn: false });
   }
 }
 

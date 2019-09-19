@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  FlatList
+} from "react-native";
 import { Header, Left, Right, Icon } from "native-base";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import backgroundimg from "../assets/backgroundimg.jpg";
@@ -22,10 +29,17 @@ class MyPlants extends Component {
     }
   };
   state = {
-    isLoading: true
+    isLoading: true,
+    plants: [
+      { name: "Aloe", image: greenhouseplant },
+      { name: "Snapdragon", image: snapdragon },
+      { name: "Pineapple", image: pineapple },
+      { name: "Pineberry", image: pineberry }
+    ]
   };
   render() {
     const { navigate, openDrawer } = this.props.navigation;
+    const { plants } = this.state;
     return (
       <>
         <ImageBackground source={backgroundimg} style={styles.background}>
@@ -50,6 +64,7 @@ class MyPlants extends Component {
                     fontSize: 24,
                     color: "white"
                   }}
+                  onPress={() => navigate("Home")}
                 >
                   Reactor Grow
                 </Text>
@@ -83,25 +98,39 @@ class MyPlants extends Component {
                   >
                     My Plants
                   </Text>
+                  {/* <FlatList
+                  data={plants}
+                  // renderItem=[({item}) => <Item title={plants.name, plants.image}/>]>
+
+                  </FlatList> */}
                   <View style={styles.plants}>
                     <View style={styles.plants}>
-                      <Text style={styles.text}>Aloe</Text>
+                      <Text style={styles.text}>{plants[0].name}</Text>
                       <Image
-                        source={greenhouseplant}
+                        source={plants[0].image}
                         style={styles.image}
                       ></Image>
                     </View>
                     <View style={styles.plants}>
-                      <Text style={styles.text}>Snapdragon</Text>
-                      <Image source={snapdragon} style={styles.image}></Image>
+                      <Text style={styles.text}>{plants[1].name}</Text>
+                      <Image
+                        source={plants[1].image}
+                        style={styles.image}
+                      ></Image>
                     </View>
                     <View style={styles.plants}>
-                      <Text style={styles.text}>Pineapple</Text>
-                      <Image source={pineapple} style={styles.image}></Image>
+                      <Text style={styles.text}>{plants[2].name}</Text>
+                      <Image
+                        source={plants[2].image}
+                        style={styles.image}
+                      ></Image>
                     </View>
                     <View style={styles.plants}>
-                      <Text style={styles.text}>Pineberry</Text>
-                      <Image source={pineberry} style={styles.image}></Image>
+                      <Text style={styles.text}>{plants[3].name}</Text>
+                      <Image
+                        source={plants[3].image}
+                        style={styles.image}
+                      ></Image>
                     </View>
                   </View>
                 </View>

@@ -12,7 +12,6 @@ export const getAllData = () => {
   return api
     .get("https://nc-greenhouse-project.herokuapp.com/greenhouse")
     .then(({ body: { readings } }) => {
-      console.log(readings);
       return readings;
     });
 };

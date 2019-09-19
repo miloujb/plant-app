@@ -43,7 +43,6 @@ class MyGarden extends React.Component {
   setWindowStatus() {
     const { window } = this.state;
     this.setState(currentState => {
-      console.log(window);
       return { window: !currentState.window };
     });
   }
@@ -89,6 +88,7 @@ class MyGarden extends React.Component {
                       fontSize: 24,
                       color: "white"
                     }}
+                    onPress={() => navigate("Home")}
                   >
                     Reactor Grow
                   </Text>
@@ -139,8 +139,7 @@ class MyGarden extends React.Component {
                       </Text>
                     </View>
                   </View>
-                  <View style={styles.icons}>
-                                    </View>
+                  <View style={styles.icons}></View>
                 </View>
                 <View style={styles.bottomHalf}>
                   <View>
@@ -225,13 +224,18 @@ class MyGarden extends React.Component {
                     <View style={styles.bottom}>
                       <Text
                         style={{
-                          fontSize: 40,
+                          fontSize: 24,
                           fontWeight: "500",
                           color: "white",
-                          marginBottom: 20
+                          marginBottom: 20,
+                          textAlign: "center",
+                          borderColor: "transparent",
+                          borderBottomColor: "lightgrey",
+                          borderWidth: 1
                         }}
+                        onPress={() => navigate("Plants")}
                       >
-                        Aloe
+                        View my plants
                       </Text>
                       <Image
                         style={styles.plant}
@@ -276,7 +280,7 @@ class MyGarden extends React.Component {
   fetchAllData = () => {
     getAllData()
       .then(data => {
-        // console.log(data, "plant");
+
         this.setState({
           data,
           isLoading: false,

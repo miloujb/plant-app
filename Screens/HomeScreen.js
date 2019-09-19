@@ -9,15 +9,17 @@ import {
   TouchableOpacity,
   ImageBackground
 } from "react-native";
-
+import { NavigationEvents } from "react-navigation";
 import ReactorGrowFinal2 from "../assets/ReactorGrowFinal2.png";
 import { Header, Left, Right, Icon } from "native-base";
 import backgroundimg from "../assets/backgroundimg.jpg";
+import { ThemeConsumer } from "react-native-elements";
 
 export default class HomeScreen extends React.Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    isLoggedIn: false
   };
 
   static navigationOptions = {
@@ -30,14 +32,22 @@ export default class HomeScreen extends React.Component {
     }
   };
   checkLogin() {
-    const { email, password } = this.state;
+    const { email, password, isLoggedIn } = this.state;
     if (email == "a" && password == "a") {
-      console.log("hello");
       this.props.navigation.navigate("Garden");
-      this.setState({ password: "", email: "" });
+      this.setState({ password: "", email: "", isLoggedIn: true });
     } else {
       Alert.alert("Error", "Incorrect email or password", [{ text: "Okay" }]);
     }
+  }
+
+  // componentDidMount() {
+  //   this.signOut();
+  // }
+
+  signOut() {
+    const signedOut = this.props.navigation.getParam("isLoggedIn");
+    if (signedOut !== undefined) this.setState({ isLoggedIn: signedOut });
   }
 
   render() {
@@ -45,6 +55,7 @@ export default class HomeScreen extends React.Component {
     const { navigate, openDrawer } = this.props.navigation;
     return (
       <>
+        <NavigationEvents onDidFocus={() => this.signOut()} />
         <ImageBackground source={backgroundimg} style={styles.background}>
           <Header
             style={{
@@ -64,16 +75,15 @@ export default class HomeScreen extends React.Component {
           <View style={styles.container}>
             <Image source={ReactorGrowFinal2} style={styles.image} />
           </View>
-          <View style={styles.overlay}></View>
-          <View style={{ padding: 160, alignItems: "center" }}>
+          <View style={{ padding: "10%", alignItems: "center" }}>
             <View
               style={{
                 flexDirection: "column",
                 justifyContent: "center",
-                paddingBottom: 200
+                paddingBottom: "20%"
               }}
             >
-              <Text style={styles.text}>Log into your account</Text>
+              <Text style={styles.logInText}>Log into your account</Text>
               <TextInput
                 placeholder="example@example.com"
                 style={styles.input}
@@ -91,8 +101,11 @@ export default class HomeScreen extends React.Component {
                 <TouchableOpacity
                   style={styles.button}
                   onPress={() => this.checkLogin()}
+                  disabled={this.state.isLoggedIn}
                 >
-                  <Text style={styles.text}>Log In</Text>
+                  <Text style={styles.text}>
+                    {this.state.isLoggedIn ? "Logged In" : "Log In"}
+                  </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} disabled>
                   <Text style={styles.text}>Register</Text>
@@ -109,8 +122,6 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: "100%",
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column"
@@ -144,7 +155,6 @@ const styles = StyleSheet.create({
     opacity: 1
   },
   image: {
-    marginTop: 150,
     alignItems: "center",
     justifyContent: "center",
     width: 125,
@@ -152,10 +162,19 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     opacity: 0.8,
     borderWidth: 3,
-    borderColor: "lightblue"
+    borderColor: "lightblue",
+    margin: 0
   },
   disabled: {
     opacity: 0.5
   },
-  background: { width: "100%", height: "100%" }
+  background: { width: "100%", height: "100%" },
+  logInText: {
+    textAlign: "center",
+    color: "white",
+    textShadowColor: "black",
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: "5%"
+  }
 });
