@@ -11,9 +11,11 @@ import {
 import { Header, Left, Right, Icon } from "native-base";
 import { getAllData } from "../api";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
-
 import backgroundimg from "../assets/backgroundimg.jpg";
 import greenhouseplant from "../assets/greenhouseplant.jpg";
+import snapdragon from "../assets/snapdragon.jpg";
+import pineapple from "../assets/pineapple.jpg";
+import pineberry from "../assets/pineberry.jpg";
 
 class MyGarden extends React.Component {
   static navigationOptions = {
@@ -30,7 +32,8 @@ class MyGarden extends React.Component {
     isLoading: true,
     water: false,
     window: null,
-    data: [{ water: false, window: false }]
+    data: [{ water: false, window: false }],
+    image: greenhouseplant
   };
 
   setWaterStatus() {
@@ -52,7 +55,7 @@ class MyGarden extends React.Component {
   }
 
   render() {
-    const { data, isLoading } = this.state;
+    const { data, isLoading, image } = this.state;
     const { navigate, openDrawer } = this.props.navigation;
     if (isLoading)
       return (
@@ -88,7 +91,6 @@ class MyGarden extends React.Component {
                       fontSize: 24,
                       color: "white"
                     }}
-                    onPress={() => navigate("Home")}
                   >
                     Reactor Grow
                   </Text>
@@ -237,10 +239,7 @@ class MyGarden extends React.Component {
                       >
                         View my plants
                       </Text>
-                      <Image
-                        style={styles.plant}
-                        source={greenhouseplant}
-                      ></Image>
+                      <Image style={styles.plant} source={image}></Image>
                       <View style={styles.wrap1}>
                         <TouchableOpacity
                           style={styles.button1}
@@ -280,7 +279,6 @@ class MyGarden extends React.Component {
   fetchAllData = () => {
     getAllData()
       .then(data => {
-
         this.setState({
           data,
           isLoading: false,

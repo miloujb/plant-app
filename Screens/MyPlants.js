@@ -5,7 +5,8 @@ import {
   Text,
   View,
   Image,
-  FlatList
+  FlatList,
+  SafeAreaView
 } from "react-native";
 import { Header, Left, Right, Icon } from "native-base";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
@@ -64,7 +65,6 @@ class MyPlants extends Component {
                     fontSize: 24,
                     color: "white"
                   }}
-                  onPress={() => navigate("Home")}
                 >
                   Reactor Grow
                 </Text>
@@ -98,35 +98,70 @@ class MyPlants extends Component {
                   >
                     My Plants
                   </Text>
-                  {/* <FlatList
-                  data={plants}
-                  // renderItem=[({item}) => <Item title={plants.name, plants.image}/>]>
-
-                  </FlatList> */}
+                  {/* <SafeAreaView>
+                    <FlatList
+                      data={plants}
+                      renderItem={({ item }) => {
+                        <View>
+                          <Text style={styles.text}>{item.name}</Text>
+                          <Image style={styles.image}>{item.image}</Image>
+                        </View>;
+                      }}
+                      keyExtractor={item => item.name}
+                    />
+                  </SafeAreaView> */}
                   <View style={styles.plants}>
                     <View style={styles.plants}>
-                      <Text style={styles.text}>{plants[0].name}</Text>
+                      <Text
+                        style={styles.text}
+                        onPress={() =>
+                          navigate("Garden", { image: plants[0].image })
+                        }
+                      >
+                        {plants[0].name}
+                      </Text>
                       <Image
                         source={plants[0].image}
                         style={styles.image}
                       ></Image>
                     </View>
                     <View style={styles.plants}>
-                      <Text style={styles.text}>{plants[1].name}</Text>
+                      <Text
+                        style={styles.text}
+                        onPress={() =>
+                          navigate("Garden", { image: plants[1].image })
+                        }
+                      >
+                        {plants[1].name}
+                      </Text>
                       <Image
                         source={plants[1].image}
                         style={styles.image}
                       ></Image>
                     </View>
                     <View style={styles.plants}>
-                      <Text style={styles.text}>{plants[2].name}</Text>
+                      <Text
+                        style={styles.text}
+                        onPress={() =>
+                          navigate("Garden", { image: plants[2].image })
+                        }
+                      >
+                        {plants[2].name}
+                      </Text>
                       <Image
                         source={plants[2].image}
                         style={styles.image}
                       ></Image>
                     </View>
                     <View style={styles.plants}>
-                      <Text style={styles.text}>{plants[3].name}</Text>
+                      <Text
+                        style={styles.text}
+                        onPress={() =>
+                          navigate("Garden", { image: plants[3].image })
+                        }
+                      >
+                        {plants[3].name}
+                      </Text>
                       <Image
                         source={plants[3].image}
                         style={styles.image}
